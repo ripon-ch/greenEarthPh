@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+        <!-- Tailwind Css & daisyUI cdn -->
+        <link
+            href="https://cdn.jsdelivr.net/npm/daisyui@5"
+            rel="stylesheet"
+            type="text/css"
+        />
+        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+        <title>Green Earth</title>
+    </head>
+    <body>
+        <!-- Navbar -->
+        <header class="sticky top-0 z-40 bg-[#15803D] backdrop-blur">
+            <!-- Navbar Left -->
+            <div
+                class="container mx-auto px-4 flex h-16 items-center justify-between"
+            >
+                <a href="#top" class="font-extrabold text-lg text-white"
+                    ><span>♻️</span> Green Earth</a
+                >
+                <!-- Navbar Middle -->
+                <nav class="hidden md:flex gap-8 text-sm">
+                    <a href="#about" class="hover:text-primary text-white"
+                        >About</a
+                    >
+                    <a href="#impact" class="hover:text-primary text-white"
+                        >Gallery</a
+                    >
+                    <a href="#donate" class="hover:text-primary text-white"
+                        >Plant a Tree</a
+                    >
+                </nav>
+                <!-- Navbar Button -->
+                <div class="flex items-center gap-2">
+                    <button
+                        id="menuBtn"
+                        class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-md border border-white hover:bg-secondary"
+                        aria-label="Toggle menu"
+                    >
+                        <svg
+                            width="20"
+                            height="20"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="white"
+                            stroke-width="2"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <line x1="3" y1="6" x2="21" y2="6" />
+                            <line x1="3" y1="12" x2="21" y2="12" />
+                            <line x1="3" y1="18" x2="21" y2="18" />
+                        </svg>
+                    </button>
+                    <a
+                        href="#donate"
+                        class="inline-flex items-center rounded-full bg-[#FACC15] px-4 py-2 text-green-800"
+                        >Plant a Tree</a
+                    >
+                </div>
+            </div>
+            <div
+                id="mobileMenu"
+                class="hidden md:hidden border-b bg-white/95 shadow"
+            >
+                <div
+                    class="container mx-auto px-4 py-3 flex flex-col gap-2 text-sm"
+                >
+                    <a href="#about" class="py-2">About</a>
+                    <a href="#impact" class="py-2">Gallery</a>
+                    <a href="#donate" class="py-2">Plant a Tree</a>
+                </div>
+            </div>
+        </header>
+    </body>
+</html>
