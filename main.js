@@ -25,3 +25,23 @@ const els = {
   modalClose: document.getElementById("modalClose"),
   year: document.getElementById("year"),
 };
+
+let categories = [];
+let plants = [];
+let selectedCategory = "all";
+const cart = new Map();
+let modalPlant = null;
+
+// Navbar Button //
+document.getElementById("menuBtn").addEventListener("click", () => {
+  const m = document.getElementById("mobileMenu");
+  m.classList.toggle("hidden");
+});
+
+els.year.textContent = new Date().getFullYear();
+
+autoInit();
+
+async function autoInit() {
+  await Promise.all([loadCategories(), loadAllPlants()]);
+}
