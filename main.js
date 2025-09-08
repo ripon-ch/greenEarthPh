@@ -1,10 +1,11 @@
 // All API Link //
 
 const API = {
-    allPlants: "https://openapi.programming-hero.com/api/plants",
-    categories: "https://openapi.programming-hero.com/api/categories",
-    byCategory: id => `https://openapi.programming-hero.com/api/category/${id}`,
-    detail: id => `https://openapi.programming-hero.com/api/plant/${id}`
+  allPlants: "https://openapi.programming-hero.com/api/plants",
+  categories: "https://openapi.programming-hero.com/api/categories",
+  byCategory: id => `https://openapi.programming-hero.com/api/category/${id}`,
+  detail: id => `https://openapi.programming-hero.com/api/plant/${id}`,
+  plants: "/api/proxy/plants",
 };
 
 // Get Element By ID //
@@ -45,6 +46,7 @@ autoInit();
 async function autoInit() {
   await Promise.all([loadCategories(), loadAllPlants()]);
 }
+
 function toLabel(v) {
   if (v == null) return "";
   if (typeof v === "string" || typeof v === "number") return String(v);
@@ -269,7 +271,7 @@ function closeModal() {
 }
 
 // Donate form
- document.getElementById("donateForm").addEventListener("submit", (e) => {
+document.getElementById("donateForm").addEventListener("submit", (e) => {
   e.preventDefault();
   alert("Thank you for planting trees! 🌳");
 });
