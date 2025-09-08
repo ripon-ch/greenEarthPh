@@ -133,7 +133,7 @@ function renderCategories() {
   const frag = document.createDocumentFragment();
   const mkBtn = (label, active, onClick) => {
     const btn = document.createElement("button");
-    btn.className = `w-full whitespace-nowrap rounded-md px-3 py-2 text-left border transition-colors ${active ? "bg-primary text-white border-primary" : "bg-secondary hover:bg-green-100 hover:border-primary hover:text-primary"}`;
+    btn.className = `w-full whitespace-nowrap rounded-md px-3 py-2 text-left transition-colors ${active ? "bg-[#15803D] text-white border-primary" : " hover:bg-green-100 hover:border-primary hover:text-white"}`;
     btn.textContent = label;
     btn.onclick = onClick;
     return btn;
@@ -151,7 +151,7 @@ function renderGrid() {
   els.grid.innerHTML = "";
   displayed.forEach((p) => {
     const card = document.createElement("article");
-    card.className = "rounded-lg border overflow-hidden shadow-sm bg-white";
+    card.className = "rounded-lg overflow-hidden shadow-sm bg-white";
     const img = document.createElement("div");
     img.className = "aspect-video bg-slate-200";
     if (p.image) {
@@ -174,14 +174,14 @@ function renderGrid() {
     const meta = document.createElement("div");
     meta.className = "flex items-center justify-between";
     const chip = document.createElement("span");
-    chip.className = "text-xs px-2 py-1 rounded-full bg-secondary border";
+    chip.className = "text-xs text-green-700 px-2 py-1 rounded-full bg-[#DCFCE7]";
     chip.textContent = p.category || "Tree";
     const price = document.createElement("span");
     price.className = "font-semibold";
     price.textContent = `$${(p.price || 0).toFixed(0)}`;
     meta.append(chip, price);
     const add = document.createElement("button");
-    add.className = "w-full rounded-md bg-primary text-white py-2 font-medium";
+    add.className = "w-full rounded-md bg-[#15803D] text-white py-2 font-medium";
     add.textContent = "Add to Cart";
     add.onclick = () => addToCart(p);
     body.append(title);
@@ -216,7 +216,7 @@ function renderCart() {
   cart.forEach((it) => {
     total += it.price * it.qty;
     const row = document.createElement("div");
-    row.className = "flex items-center justify-between gap-3 rounded-md border px-3 py-2";
+    row.className = "flex items-center justify-between gap-3 rounded-md px-3 py-2";
     row.innerHTML = `<div><p class="font-medium leading-tight">${it.name}</p><p class="text-xs text-slate-500">$${it.price.toFixed(0)} × ${it.qty}</p></div><button class="text-red-500 text-lg">❌</button>`;
     row.querySelector("button").onclick = () => removeFromCart(it.id);
     els.cartList.append(row);
