@@ -45,3 +45,30 @@ autoInit();
 async function autoInit() {
   await Promise.all([loadCategories(), loadAllPlants()]);
 }
+function toLabel(v) {
+  if (v == null) return "";
+  if (typeof v === "string" || typeof v === "number") return String(v);
+  if (typeof v === "object") {
+    return (
+      v.name ?? v.title ?? v.label ?? v.category ?? v.text ??
+      (typeof v.value === "string" || typeof v.value === "number" ? v.value : "")
+    ) ?? "";
+  }
+  return String(v);
+}
+
+function normalizeCategory(raw) {
+  const id = raw?.id ?? raw?.category_id ?? raw?.categoryId ?? raw?.slug ?? raw?.value ?? toLabel(raw);
+  const name = toLabel(raw?.name) || toLabel(raw?.category) || toLabel(raw?.title) || toLabel(raw?.label) || toLabel(raw);
+  return { id, name };
+}
+
+function getArray(payload) {
+  if (!payload) return [];
+  if (Array.isArray(payload)) return payload;
+  if (Array.isArray(payload.data)) return payload.data;
+  if (Array.isArray(payload.plants)) return payload.plants;
+  if (Array.isArray(payload.items)) return payload.items;
+  if (Array.isArray(payload.categories)) return payload.categories;
+  return [];
+}
