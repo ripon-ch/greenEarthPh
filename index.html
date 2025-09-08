@@ -15,7 +15,7 @@
 
         <title>Green Earth</title>
     </head>
-    <body>
+    <body class="bg-[#DCFCE7] text-slate-900">
         <!-- Navbar -->
         <header class="sticky top-0 z-40 bg-[#15803D] backdrop-blur">
             <!-- Navbar Left -->
@@ -91,5 +91,30 @@
         </div>
     </div>
 </section>
+    <!-- Main Section -->
+        <main id="trees" class="container mx-auto px-4 py-10">
+            <h2 class="text-center text-2xl md:text-3xl font-semibold mb-8">Choose Your Trees</h2>
+             <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+                         
+           <!-- Categories -->
+        <aside class="md:col-span-2 order-1 md:order-none">
+            <div class="p-4 sticky top-20 h-full flex flex-col">
+                <h3 class="font-semibold mb-3">Categories</h3>
+                <div id="categoryList" class="block space-y-2 overflow-auto pr-1 flex-1"></div>
+            </div>
+        </aside>
+                <!-- Grid -->
+        <section class="md:col-span-8">
+          <div class="rounded-xl bg-white p-4 md:p-6 shadow h-full">
+            <div id="gridSpinner" class="hidden py-10 w-full flex items-center justify-center"><svg class="animate-spin h-8 w-8 text-primary" viewBox="0 0 50 50"><circle class="opacity-20" cx="25" cy="25" r="20" stroke="currentColor" stroke-width="5" fill="none"/><circle class="opacity-90" cx="25" cy="25" r="20" stroke="currentColor" stroke-width="5" fill="none" stroke-dasharray="100" stroke-dashoffset="75"/></svg></div>
+            <div id="cardGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"></div>
+            <p id="emptyMsg" class="hidden text-center text-slate-500 py-8">No plants found for this category.</p>
+          </div>
+        </section>
+             </div>
+        </main>
+        
+<!-- JavaScript Link -->
+    <script src="./app.js"></script>
     </body>
 </html>
