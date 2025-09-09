@@ -180,7 +180,7 @@ function renderGrid() {
     chip.textContent = p.category || "Tree";
     const price = document.createElement("span");
     price.className = "font-semibold";
-    price.textContent = `$${(p.price || 0).toFixed(0)}`;
+    price.textContent = `৳${(p.price || 0).toFixed(0)}`;
     meta.append(chip, price);
     const add = document.createElement("button");
     add.className = "w-full rounded-md bg-[#15803D] text-white py-2 font-medium";
@@ -219,7 +219,7 @@ function renderCart() {
     total += it.price * it.qty;
     const row = document.createElement("div");
     row.className = "flex items-center justify-between gap-3 rounded-md px-3 py-2";
-    row.innerHTML = `<div><p class="font-medium leading-tight">${it.name}</p><p class="text-xs text-slate-500">$${it.price.toFixed(0)} × ${it.qty}</p></div><button class="text-red-500 text-lg">❌</button>`;
+    row.innerHTML = `<div><p class="font-medium leading-tight">${it.name}</p><p class="text-xs text-slate-500">৳${it.price.toFixed(0)} × ${it.qty}</p></div><button class="text-red-500 text-lg">❌</button>`;
     row.querySelector("button").onclick = () => removeFromCart(it.id);
     els.cartList.append(row);
   });
@@ -229,7 +229,7 @@ function renderCart() {
     p.textContent = "Your cart is empty.";
     els.cartList.append(p);
   }
-  els.cartTotal.textContent = `$${total.toFixed(0)}`;
+  els.cartTotal.textContent = `৳${total.toFixed(0)}`;
 }
 
 async function openModal(p) {
@@ -237,7 +237,7 @@ async function openModal(p) {
   els.modalTitle.textContent = p.name;
   els.modalDesc.textContent = p.description || "";
   els.modalCategory.textContent = p.category || "Tree";
-  els.modalPrice.textContent = `$${(p.price || 0).toFixed(0)}`;
+  els.modalPrice.textContent = `৳${(p.price || 0).toFixed(0)}`;
   els.modalImage.style.backgroundImage = p.image ? `url(${p.image})` : "";
   els.modalImage.style.backgroundSize = "cover";
   els.modalImage.style.backgroundPosition = "center";
@@ -250,7 +250,7 @@ async function openModal(p) {
     modalPlant = detailed;
     els.modalDesc.textContent = detailed.description || "";
     els.modalCategory.textContent = detailed.category || "Tree";
-    els.modalPrice.textContent = `$${(detailed.price || 0).toFixed(0)}`;
+    els.modalPrice.textContent = `৳${(detailed.price || 0).toFixed(0)}`;
     if (detailed.image) {
       els.modalImage.style.backgroundImage = `url(${detailed.image})`;
     }
