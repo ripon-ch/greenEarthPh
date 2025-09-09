@@ -60,10 +60,12 @@ function toLabel(v) {
 }
 
 function normalizeCategory(raw) {
-  const id = raw?.id ?? raw?.category_id ?? raw?.categoryId ?? raw?.slug ?? raw?.value ?? toLabel(raw);
-  const name = toLabel(raw?.name) || toLabel(raw?.category) || toLabel(raw?.title) || toLabel(raw?.label) || toLabel(raw);
-  return { id, name };
+  return {
+    id: raw?.id ?? "",
+    name: raw?.category_name ?? raw?.name ?? "Unknown",
+  };
 }
+
 
 function getArray(payload) {
   if (!payload) return [];
@@ -85,11 +87,15 @@ function normalizePlant(raw) {
   return { id, name, image, description, category, price };
 }
 
+// ✅ Load categories from API
 async function loadCategories() {
   try {
     const res = await fetch(API.categories);
     const json = await res.json();
-    categories = getArray(json).map(normalizeCategory);
+
+    // categories array is inside json.categories
+    categories = (json.categories || []).map(normalizeCategory);
+
     renderCategories();
   } catch (e) {
     console.error("Failed to load categories", e);
@@ -131,23 +137,45 @@ async function loadGridWith(fn) {
   }
 }
 
+// ✅ Render category buttons
+// ✅ Render category buttons (with active highlight)
 function renderCategories() {
   const frag = document.createDocumentFragment();
-  const mkBtn = (label, active, onClick) => {
+  
+  const mkBtn = (label, id) => {
     const btn = document.createElement("button");
-    btn.className = `w-full whitespace-nowrap rounded-md px-3 py-2 text-left transition-colors ${active ? "bg-[#15803D] text-white border-primary" : " hover:bg-green-100 hover:border-primary hover:text-white"}`;
+    btn.className =
+      "w-full whitespace-nowrap rounded-md px-3 py-2 text-left transition-colors " +
+      (selectedCategory === id ?
+        "bg-[#15803D] text-white" :
+        "hover:bg-green-100 hover:text-[#15803D]");
     btn.textContent = label;
-    btn.onclick = onClick;
+    
+    btn.onclick = () => {
+      selectedCategory = id;
+      if (id === "all") {
+        loadAllPlants();
+      } else {
+        loadCategory(id);
+      }
+      renderCategories(); // re-render for active state
+    };
+    
     return btn;
   };
-  frag.append(mkBtn("All Trees", selectedCategory === "all", () => loadAllPlants()))
+  
+  // "All Trees" default button
+  frag.append(mkBtn("All Trees", "all"));
+  
+  // API categories
   categories.forEach((c) => {
-    frag.append(mkBtn(c.name, selectedCategory === c.id, () => loadCategory(c.id)));
+    frag.append(mkBtn(c.name, c.id));
   });
+  
   els.categoryList.innerHTML = "";
   els.categoryList.append(frag);
 }
-
+loadCategories();
 function renderGrid() {
   const displayed = plants.slice(0, 6);
   els.grid.innerHTML = "";
